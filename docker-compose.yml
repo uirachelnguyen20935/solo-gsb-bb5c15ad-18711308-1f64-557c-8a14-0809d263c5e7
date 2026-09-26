@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     image: transcript-align-api:latest
     container_name: transcript-align-api
-    # 对齐大文本时 O(m*n) 反向距离表需要较多内存（约 (m+1)(n+1)*2 字节）
+    # 对齐反向距离表按 √m 行分块检查点 + 回溯重算当前块，峰值约 O(√m·n)（20000×20000 约 11MB）
     mem_limit: 2g
     memswap_limit: 2g
     ports:
